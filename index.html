@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>영끌말판 - 강남 아파트까지 주사위 한 판</title>
+  <meta name="description" content="지방 원룸에서 시작해 경기도, 서울, 강남 아파트까지. 집값과 금리, 정책 뉴스를 버티며 주사위를 굴리는 무료 웹 보드게임.">
+  <meta name="theme-color" content="#ef5350">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <header class="top">
+      <button id="btn-menu" class="icon-btn" aria-label="메뉴">☰</button>
+      <div class="top-mid">
+        <span id="region" class="region-badge">지방</span>
+        <span id="age">28세 1분기</span>
+      </div>
+      <button id="btn-help" class="icon-btn" aria-label="도움말">?</button>
+    </header>
+
+    <section class="stats">
+      <div class="stat"><div class="lbl">현금</div><div id="cash" class="val">-</div></div>
+      <div class="stat"><div class="lbl">대출</div><div id="loan" class="val">-</div><div id="loan-sub" class="sub"></div></div>
+      <div class="stat"><div class="lbl">내 집</div><div id="home" class="val">-</div><div id="home-sub" class="sub"></div></div>
+      <div class="stat"><div class="lbl">순자산</div><div id="equity" class="val">-</div></div>
+    </section>
+
+    <section class="bars">
+      <div class="bar-row"><span>❤️ 건강</span><div class="bar"><div id="health-bar" class="fill health"></div></div><b id="health-num">0</b></div>
+      <div class="bar-row"><span>🏠 가족</span><div class="bar"><div id="family-bar" class="fill family"></div></div><b id="family-num">0</b></div>
+    </section>
+
+    <section id="news" class="news"></section>
+    <div id="goal" class="goal"></div>
+
+    <section id="board" class="board"></section>
+
+    <section class="controls">
+      <div id="dice" class="dice">⚀</div>
+      <button id="btn-roll" class="btn">🎲 굴리기</button>
+      <button id="btn-over" class="btn warn">🔥 야근 굴리기<small>주사위 2개 · 월급↑ 건강↓</small></button>
+    </section>
+
+    <ul id="log" class="log"></ul>
+    <footer class="foot">집값은 국토교통부 실거래가(2026년 7~9월) 지역 평균으로 계산한 추정치이며, 단지 이름과 사건은 모두 가상입니다.</footer>
+  </main>
+
+  <!-- 시작 화면 -->
+  <div id="title" class="screen">
+    <div class="title-box">
+      <div class="logo">🏠🎲</div>
+      <h1>영끌말판</h1>
+      <p>지방 원룸에서 강남 아파트까지,<br>주사위 한 판에 인생을 걸어 보세요.</p>
+      <button id="btn-continue" class="btn hidden">이어하기</button>
+      <button id="btn-new" class="btn">새 게임</button>
+      <p id="title-best" class="best"></p>
+      <p class="small">한 판 약 15분 · 자동 저장</p>
+    </div>
+  </div>
+
+  <!-- 도움말 -->
+  <div id="help" class="screen hidden">
+    <div class="modal-box">
+      <h2>게임 방법</h2>
+      <ul class="help-list">
+        <li>주사위 한 번이 3개월(1분기)이에요. 매 분기 월급이 들어오고 생활비·대출 이자가 나가요.</li>
+        <li>말판 끝 🏁에서 <b>이사 심사</b>. 지금 집을 팔고 대출을 끼워 다음 지역 집을 살 돈이 되면 이사해요.</li>
+        <li>지방 → 경기도 → 서울 → 강남. 마지막 목표는 강남 84㎡!</li>
+        <li>🍀 호재 ⚡ 악재 📰 뉴스(금리·세법·선거) 📈 투자(그래프 타기) 🔀 선택 ☕ 휴식</li>
+        <li>건강이 0이 되거나 신용대출이 한도를 넘으면 게임 오버.</li>
+        <li>단지마다 대단지·초품아·역세권·상가 조건에 따라 값과 효과가 달라요.</li>
+      </ul>
+      <button id="btn-help-close" class="btn">닫기</button>
+    </div>
+  </div>
+
+  <!-- 사건 창 -->
+  <div id="modal" class="screen hidden">
+    <div class="modal-box">
+      <h2 id="modal-title"></h2>
+      <div id="modal-body"></div>
+      <div id="modal-buttons" class="modal-buttons"></div>
+    </div>
+  </div>
+
+  <!-- 집값 그래프 타기 -->
+  <div id="graph" class="screen hidden">
+    <div class="modal-box graph-box">
+      <h2>📈 집값 그래프 타기</h2>
+      <div id="graph-info" class="graph-info"></div>
+      <div class="graph-stage">
+        <canvas id="graph-canvas"></canvas>
+        <div id="graph-overlay" class="graph-overlay">탭해서 시작!<small>화면을 누르면 점프</small></div>
+      </div>
+      <p class="small">🪙 동전 +5% · 폭락 구멍에 빠지면 -15% · 오르막을 타면 수익 상승</p>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/graph.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
